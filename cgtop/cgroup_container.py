@@ -1,6 +1,5 @@
 from unicurses import *
 from helpers import *
-from colors import *
 from utils import *
 
 
