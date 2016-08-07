@@ -4,13 +4,13 @@ from utils import *
 
 
 class CgroupContainer:
-  def __init__(self, start_x, start_y, width, height, box_border=True,
+  def __init__(self, layout, box_border=True,
                title="CGroup Container"):
-    self.start_x = start_x
-    self.start_y = start_y
-    self.width = width
-    self.height = height
-    self.window = create_window(start_x, start_y, width, height)
+    self.start_x = layout.start_x
+    self.start_y = layout.start_y
+    self.width = layout.width
+    self.height = layout.height
+    self.window = create_window(self.start_x, self.start_y, self.width, self.height)
     self.title = title
 
     self.cpu_fill_bar = None
