@@ -4,6 +4,11 @@ from utils import *
 
 
 class CgroupContainer:
+  """Base Container class per application
+
+  This class creates a container for an app with
+  fill bars showing the current usage.
+  """
   def __init__(self, layout, box_border=True,
                title="CGroup Container"):
     self.start_x = layout.start_x
@@ -26,8 +31,18 @@ class CgroupContainer:
 
   @staticmethod
   def update_fill_bar_data(fill_bar_panel, new_data, total_data,
-                           start_text,
-                           end_text):
+                           start_text, end_text):
+    """
+    Update the data in fill.
+
+    :param fill_bar_panel: panel object for the fill bar.
+    :param new_data: updated value of the metric.
+    :param total_data: Max value of the metric.
+    :param start_text: Description before fill bar
+    :param end_text: Display something at the end of bar.
+
+    :return:
+    """
     window = panel_window(fill_bar_panel.panel)
     wclear(window)
 
@@ -94,10 +109,17 @@ class CgroupContainer:
     return self.cpu_fill_bar
 
   def create_memory_fill_bar(self):
-    # starts_x = x + 2
-    # starts_y = max_y - (2 + 2 + 2)
-    # width = total_width - 4
-    # height = 2
+    """Creates a memory fill bar at the bottom of container.
+
+    Coordinates:
+
+    starts_x = x + 2
+    start_y = max_y - 2
+    width = total_width - 4
+    height = 2
+
+    :return: FillBarPanel object.
+    """
     self.memory_fill_bar = FillBarPanel(
       self.start_x + 2,
       self.start_y + self.height - 4,
