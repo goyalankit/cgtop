@@ -74,8 +74,6 @@ class CgroupContainer:
     waddstr(window, end_text,
             attr=color_pair(make_color(COLOR_YELLOW, COLOR_BLACK)))
 
-    show_changes()
-
   def create_cpu_fill_bar(self):
     """Creates a cpu fill bar at the bottom of container.
 
