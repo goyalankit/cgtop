@@ -87,3 +87,10 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+.idea
+.idea/*
+
+cgtop/cgtop/bin/
+cgtop/cgtop/include/
+cgtop/cgtop/pip-selfcheck.json
