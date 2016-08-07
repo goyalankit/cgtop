@@ -37,6 +37,7 @@ class CgroupContainer:
                            start_text,
                            end_text):
     window = panel_window(fill_bar_panel.panel)
+    wclear(window)
 
     # Add text like CPU, Mem
     waddstr(
@@ -114,7 +115,7 @@ def main():
                                      height=stdscr.MAX_HEIGHT / 2)
   cpu_fill_bar = cgroup_container.create_cpu_fill_bar()
 
-  cgroup_container.update_fill_bar_data(cpu_fill_bar, new_data=100,
+  cgroup_container.update_fill_bar_data(cpu_fill_bar, new_data=10,
                                         total_data=100,
                                         start_text="CPU", end_text="120/200")
 
@@ -122,8 +123,6 @@ def main():
   cgroup_container.update_fill_bar_data(memory_fill_bar, new_data=100,
                                         total_data=100,
                                         start_text="Mem", end_text="120/200")
-
-
   # # Progress Bar
   # fill_bar = newwin(2, max_x / 2 - 4, max_y/4 + 3, 2)
   # box(progress_bar)
@@ -134,7 +133,7 @@ def main():
   show_changes()
 
   running = True
-  i = 0
+  i = 10
   while (running):
     # if i < max_x / 2 - 4:
     # progress_bar_progress = newwin(2, i + 1, max_y / 4 + 3, 2)
@@ -144,6 +143,12 @@ def main():
     # panel2 = new_panel(progress_bar_progress)
     # top_panel(panel2)
     # show_changes()
+    if i <= 100:
+      cgroup_container.update_fill_bar_data(cpu_fill_bar, new_data=i,
+                                            total_data=100,
+                                            start_text="CPU", end_text="%s/100" % i)
+      i+=10
+      show_changes()
 
     key = getch()
     if key == ord('q'):
