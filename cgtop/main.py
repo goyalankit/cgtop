@@ -23,7 +23,7 @@ def update_my_data(containers):
                                           end_text="%s/100" % data)
 
     cgroup_container.update_fill_bar_data(cgroup_container.memory_fill_bar,
-                                          new_data=100,
+                                          new_data=data,
                                           total_data=100, start_text="Mem",
                                           end_text="%s/200" % data)
 
@@ -31,11 +31,14 @@ def update_my_data(containers):
 
 
 def main():
+
   stdscr = StdScreen()
   stdscr.disable_cursor_and_key_echo()
 
   lc = LayoutCreator(stdscr.MAX_WIDTH, stdscr.MAX_HEIGHT, 6)
   layouts = lc.create_layouts()
+
+
   containers = []
   for num, layout in enumerate(layouts):
     container = AppContainer("noop-app-i%s" % num, "/sys/fs/cgroup", layout, global_stop_event)
