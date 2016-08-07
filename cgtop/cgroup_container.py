@@ -4,19 +4,25 @@ from utils import *
 
 
 class CgroupContainer:
-  def __init__(self, start_x, start_y, width, height, box_border=True):
+  def __init__(self, start_x, start_y, width, height, box_border=True,
+               title="CGroup Container"):
     self.start_x = start_x
     self.start_y = start_y
     self.width = width
     self.height = height
     self.window = create_window(start_x, start_y, width, height)
+    self.title = title
 
     self.cpu_fill_bar = None
     self.memory_fill_bar = None
 
     if box_border:
       box(self.window)
+
     self.main_panel = new_panel(self.window)
+    self.title_panel = None
+    self.cpu_fill_bar = None
+    self.memory_fill_bar = None
 
   @staticmethod
   def update_fill_bar_data(fill_bar_panel, new_data, total_data,
@@ -68,6 +74,8 @@ class CgroupContainer:
     waddstr(window, end_text,
             attr=color_pair(make_color(COLOR_YELLOW, COLOR_BLACK)))
 
+    show_changes()
+
   def create_cpu_fill_bar(self):
     """Creates a cpu fill bar at the bottom of container.
 
@@ -98,3 +106,18 @@ class CgroupContainer:
       self.width - 4, 1)
 
     return self.memory_fill_bar
+
+  def title_window_on_screen(self, title=None):
+    """Set title of the container.
+
+    :param title: Text to be set as title
+    :return: None
+    """
+    if title is not None:
+      self.title = title
+
+    t_start_x = (self.width - len(self.title)) / 2
+    window = create_window(t_start_x, self.start_y + 1, len(self.title) + 2, 1)
+    waddstr(window, self.title)
+    self.title_panel = new_panel(window)
+
