@@ -89,7 +89,7 @@ class CgroupContainer:
     :return: FillBarPanel object.
     """
     self.cpu_fill_bar = FillBarPanel(
-      self.start_x + 2, self.height - 2,
+      self.start_x + 2, self.start_y + self.height - 2,
       self.width - 4, 1
     )
 
@@ -102,7 +102,7 @@ class CgroupContainer:
     # height = 2
     self.memory_fill_bar = FillBarPanel(
       self.start_x + 2,
-      self.height - 4,
+      self.start_y + self.height - 4,
       self.width - 4, 1)
 
     return self.memory_fill_bar
@@ -116,7 +116,7 @@ class CgroupContainer:
     if title is not None:
       self.title = title
 
-    t_start_x = (self.width - len(self.title)) / 2
+    t_start_x = self.start_x + (self.width - len(self.title)) / 2
     window = create_window(t_start_x, self.start_y + 1, len(self.title) + 2, 1)
     waddstr(window, self.title)
     self.title_panel = new_panel(window)
