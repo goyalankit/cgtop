@@ -9,6 +9,9 @@ import threading
 import random
 
 
+global_stop_event = threading.Event()
+
+
 def update_my_data(cgroup_container):
   data = random.randint(1, 100)
   cgroup_container.update_fill_bar_data(cgroup_container.cpu_fill_bar,
@@ -38,7 +41,6 @@ def main():
                                         start_text="Mem", end_text="120/200")
 
 
-  global_stop_event = threading.Event()
   jb = BackgroundThread(update_my_data, global_stop_event, 1, cgroup_container)
   jb.start()
 
@@ -46,6 +48,7 @@ def main():
   while (running):
     key = getch()
     if key == ord('q'):
+      global_stop_event.set()
       running = False
       break;
 
