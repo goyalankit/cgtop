@@ -23,7 +23,7 @@ HEIGHT_FACTOR: Parts in which height will be divided.
 This assumes that most of the users are using landscape mode in
 their screens.
 
-No more than 16 applications are supported.
+TODO: autogenerate this thing.
 """
 layout_grid = {
   1: [1, 1],
@@ -38,7 +38,8 @@ layout_grid = {
   10: [4, 3],
   11: [4, 3],
   12: [4, 3],
+  13: [4, 4],
   14: [4, 4],
-  15: [4, 5],
-  16: [4, 6],
+  15: [4, 4],
+  16: [4, 4],
 }
