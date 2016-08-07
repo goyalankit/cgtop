@@ -1,2 +1,2 @@
 # cgtop
-cgtop
+cgtop like htop
