@@ -1,3 +1,4 @@
+import os
 import unicurses as uc
 
 global_color_number = 1
@@ -25,3 +26,20 @@ def make_color(foreground, background):
   global_color_number += 1
 
   return color_number
+
+
+def read_metric_from_file(path):
+  try:
+    with open(path, 'rb') as fh:
+      return fh.read().strip()
+  except IOError:
+    raise
+
+
+# TODO memoize this method.
+# TODO remove hardcoded subsystem.
+def get_current_cgroups():
+  subsystem_path = "/Users/angoyal/ws/code/extras/cgtop/testdata/sys/fs/cgroup/memory"
+  cgroup_names = [item for item in os.listdir(subsystem_path) if
+                  os.path.isdir(os.path.join(subsystem_path, item))]
+  return cgroup_names

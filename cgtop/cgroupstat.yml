@@ -1,0 +1,11 @@
+RHEL_7:
+  memory:
+    current:
+      memory.usage_in_bytes
+    max:
+      memory.limit_in_bytes
+
+
+  cpu:
+    current:
+

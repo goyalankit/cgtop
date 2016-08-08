@@ -1,11 +1,21 @@
 import random
 
-from helpers import show_changes
+from helpers import show_changes, read_metric_from_file
 
 
 class DataFetcher:
   def __init__(self):
-    self.cgroups_path = "/sys/fs/cgroup"
+    self.cgroups_path = "/Users/angoyal/ws/code/extras/cgtop/testdata/sys/fs/cgroup"
+
+  def get_memory_data(self, container):
+    base_memory_path = "%s/memory/%s/" % (self.cgroups_path, container.cgpath)
+    mem_limit_path = "%s/memory.limit_in_bytes" % base_memory_path
+    mem_usage_path = "%s/memory.usage_in_bytes" % base_memory_path
+
+    mem_limit = int(read_metric_from_file(mem_limit_path))
+    mem_usage = int(read_metric_from_file(mem_usage_path))
+
+    return mem_limit, mem_usage
 
   def fetch_data(self, containers):
     #
@@ -13,11 +23,14 @@ class DataFetcher:
     #
     data = {}
     for container in containers:
+
       data[container] = {}
       data[container]["cpu"] = random.randint(1, 100)
       data[container]["cpu_max"] = 100
-      data[container]["memory"] = random.randint(1, 200)
-      data[container]["memory_max"] = 200
+
+      max_mem, mem_usage = self.get_memory_data(container)
+      data[container]["memory"] = mem_usage
+      data[container]["memory_max"] = max_mem
     return data
 
   def update_my_data(self, containers):
@@ -34,6 +47,7 @@ class DataFetcher:
                                      new_data=data['memory'],
                                      total_data=data['memory_max'],
                                      start_text="Mem",
-                                     end_text="%s/200" % data['memory_max'])
+                                     end_text="%s/%s" % (
+                                     data['memory'], data['memory_max']))
 
     show_changes()

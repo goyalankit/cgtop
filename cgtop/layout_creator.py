@@ -1,15 +1,18 @@
 from constants import layout_grid
 from utils import Layout
+from helpers import get_current_cgroups
 
 
 class LayoutCreator:
-  def __init__(self, max_width, max_height, total):
+  def __init__(self, max_width, max_height):
     self.max_width = max_width
     self.max_height = max_height
-    self.total = total
+
+    self.cgroups = get_current_cgroups()
+    self.num_apps = len(self.cgroups)
 
   def create_layouts(self):
-    width_factor, height_factor = layout_grid[self.total]
+    width_factor, height_factor = layout_grid[self.num_apps]
 
     layouts = []
 

@@ -17,7 +17,7 @@ def main():
   standard_screen = StdScreen()
   standard_screen.disable_cursor_and_key_echo()
 
-  lc = LayoutCreator(standard_screen.MAX_WIDTH, standard_screen.MAX_HEIGHT, 6)
+  lc = LayoutCreator(standard_screen.MAX_WIDTH, standard_screen.MAX_HEIGHT)
   layouts = lc.create_layouts()
 
   # Thread to periodically fetch data

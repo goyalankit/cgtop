@@ -3,11 +3,11 @@ from helpers import show_changes
 
 
 class AppContainer(CgroupContainer):
-  def __init__(self, name, path, layout, stop_event):
+  def __init__(self, name, cgpath, layout, stop_event):
     CgroupContainer.__init__(self, layout, title=name)
 
     self.name = name
-    self.path = path
+    self.cgpath = cgpath
     self.stop_event = stop_event
 
   def initialize_bars(self):
@@ -33,7 +33,7 @@ class AppContainer(CgroupContainer):
     for num, layout in enumerate(layouts):
       container = AppContainer(
         "noop-app-i%s" % num,
-        "/sys/fs/cgroup",
+        "noop_app_i001",
         layout, global_stop_event
       )
 
