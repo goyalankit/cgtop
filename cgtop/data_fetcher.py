@@ -1,11 +1,12 @@
 import random
 
+from constants import BASE_CGROUP_PATH
 from helpers import show_changes, read_metric_from_file
 
 
 class DataFetcher:
   def __init__(self):
-    self.cgroups_path = "/Users/angoyal/ws/code/extras/cgtop/testdata/sys/fs/cgroup"
+    self.cgroups_path = BASE_CGROUP_PATH
 
   def get_memory_data(self, container):
     base_memory_path = "%s/memory/%s/" % (self.cgroups_path, container.cgpath)
