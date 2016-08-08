@@ -1,12 +1,12 @@
 from constants import layout_grid
 from utils import Layout
 
+
 class LayoutCreator:
   def __init__(self, max_width, max_height, total):
     self.max_width = max_width
     self.max_height = max_height
     self.total = total
-
 
   def create_layouts(self):
     width_factor, height_factor = layout_grid[self.total]

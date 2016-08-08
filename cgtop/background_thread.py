@@ -1,6 +1,6 @@
 """
-    Classes to provide the functionality of updating the stats off the main thread,
-    run things as a thread job
+  Class to provide the functionality of updating the stats off the main thread,
+  run things as a thread job
 """
 
 import threading
@@ -12,7 +12,7 @@ class BackgroundThread(threading.Thread):
 
     :param callback:  callback function to invoke
     :param event: external event for controlling the update operation
-    :param interval: time in seconds after which are required to fire the callback
+    :param interval: time in seconds after which callback if fired.
     :type callback: function
     :type interval: int
     """

@@ -16,7 +16,12 @@ class CgroupContainer:
     self.start_y = layout.start_y
     self.width = layout.width
     self.height = layout.height
-    self.window = create_window(self.start_x, self.start_y, self.width, self.height)
+
+    self.window = create_window(
+      self.start_x, self.start_y,
+      self.width, self.height
+    )
+
     self.title = title
 
     self.cpu_fill_bar = None
@@ -84,11 +89,16 @@ class CgroupContainer:
     uc.waddstr(window, empty_space)
 
     # Add the ending/closing ']'
-    uc.waddstr(window, "] ", attr=uc.color_pair(make_color(uc.COLOR_RED, uc.COLOR_BLACK)))
+    uc.waddstr(
+      window, "] ",
+      attr=uc.color_pair(make_color(uc.COLOR_RED, uc.COLOR_BLACK))
+    )
 
     # Add the end_text like 50/100%
-    uc.waddstr(window, end_text,
-            attr=uc.color_pair(make_color(uc.COLOR_YELLOW, uc.COLOR_BLACK)))
+    uc.waddstr(
+      window, end_text,
+      attr=uc.color_pair(make_color(uc.COLOR_YELLOW, uc.COLOR_BLACK))
+    )
 
   def create_cpu_fill_bar(self):
     """Creates a cpu fill bar at the bottom of container.
@@ -141,4 +151,3 @@ class CgroupContainer:
     window = create_window(t_start_x, self.start_y + 1, len(self.title) + 2, 1)
     uc.waddstr(window, self.title)
     self.title_panel = uc.new_panel(window)
-
