@@ -4,7 +4,7 @@ import threading
 
 from app_container import AppContainer
 from background_thread import BackgroundThread
-from constants import CHAR_Q, ESC_KEY
+from constants import CHAR_Q, ESC_KEY, REFRESH_INTERVAL
 from data_fetcher import DataFetcher
 from layout_creator import LayoutCreator
 from unicurses import endwin, getch
@@ -20,16 +20,18 @@ def main():
   lc = LayoutCreator(standard_screen.MAX_WIDTH, standard_screen.MAX_HEIGHT, 6)
   layouts = lc.create_layouts()
 
-  jb = BackgroundThread(
+  # Thread to periodically fetch data
+  # and update the view.
+  bt = BackgroundThread(
     DataFetcher().update_my_data,
-    global_stop_event, 2,
+    global_stop_event, REFRESH_INTERVAL,
     AppContainer.create_app_containers(
       layouts,
       global_stop_event
     )
   )
 
-  jb.start()
+  bt.start()
 
   start_event_loop()
 

@@ -5,6 +5,8 @@ constants used throughout the application/
 ESC_KEY = 27
 CHAR_Q = ord('q')
 
+# Data fetch interval time.
+REFRESH_INTERVAL = 1.5
 
 """
 Describes the way screen should be divides. There
