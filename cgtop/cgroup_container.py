@@ -1,6 +1,7 @@
-from unicurses import *
-from helpers import *
-from utils import *
+import unicurses as uc
+
+from helpers import create_window, make_color
+from utils import FillBarPanel
 
 
 class CgroupContainer:
@@ -22,9 +23,9 @@ class CgroupContainer:
     self.memory_fill_bar = None
 
     if box_border:
-      box(self.window)
+      uc.box(self.window)
 
-    self.main_panel = new_panel(self.window)
+    self.main_panel = uc.new_panel(self.window)
     self.title_panel = None
     self.cpu_fill_bar = None
     self.memory_fill_bar = None
@@ -43,19 +44,19 @@ class CgroupContainer:
 
     :return:
     """
-    window = panel_window(fill_bar_panel.panel)
-    wclear(window)
+    window = uc.panel_window(fill_bar_panel.panel)
+    uc.wclear(window)
 
     # Add text like CPU, Mem
-    waddstr(
+    uc.waddstr(
       window, start_text,
-      attr=color_pair(make_color(COLOR_CYAN, COLOR_BLACK))
+      attr=uc.color_pair(make_color(uc.COLOR_CYAN, uc.COLOR_BLACK))
     )
 
     # Add initial symbol [
-    waddstr(
+    uc.waddstr(
       window, " [",
-      attr=color_pair(make_color(COLOR_BLUE, COLOR_BLACK))
+      attr=uc.color_pair(make_color(uc.COLOR_BLUE, uc.COLOR_BLACK))
     )
 
     # Space for bars = total width - text and spacing.
@@ -70,9 +71,9 @@ class CgroupContainer:
     filled_bars = "|" * percent_filled_with_bars
 
     # Add |'s to the progress bar
-    waddstr(
+    uc.waddstr(
       window, filled_bars,
-      attr=color_pair(make_color(COLOR_GREEN, COLOR_BLACK))
+      attr=uc.color_pair(make_color(uc.COLOR_GREEN, uc.COLOR_BLACK))
     )
 
     empty_space = " " * (
@@ -80,14 +81,14 @@ class CgroupContainer:
     )
 
     # Add empty space.
-    waddstr(window, empty_space)
+    uc.waddstr(window, empty_space)
 
     # Add the ending/closing ']'
-    waddstr(window, "] ", attr=color_pair(make_color(COLOR_RED, COLOR_BLACK)))
+    uc.waddstr(window, "] ", attr=uc.color_pair(make_color(uc.COLOR_RED, uc.COLOR_BLACK)))
 
     # Add the end_text like 50/100%
-    waddstr(window, end_text,
-            attr=color_pair(make_color(COLOR_YELLOW, COLOR_BLACK)))
+    uc.waddstr(window, end_text,
+            attr=uc.color_pair(make_color(uc.COLOR_YELLOW, uc.COLOR_BLACK)))
 
   def create_cpu_fill_bar(self):
     """Creates a cpu fill bar at the bottom of container.
@@ -138,6 +139,6 @@ class CgroupContainer:
 
     t_start_x = self.start_x + (self.width - len(self.title)) / 2
     window = create_window(t_start_x, self.start_y + 1, len(self.title) + 2, 1)
-    waddstr(window, self.title)
-    self.title_panel = new_panel(window)
+    uc.waddstr(window, self.title)
+    self.title_panel = uc.new_panel(window)
 

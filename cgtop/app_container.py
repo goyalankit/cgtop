@@ -1,4 +1,5 @@
 from cgroup_container import CgroupContainer
+from helpers import show_changes
 
 
 class AppContainer(CgroupContainer):
@@ -16,12 +17,28 @@ class AppContainer(CgroupContainer):
     self.update_fill_bar_data(
       cpu_fill_bar,
       new_data=0, total_data=100,
-      start_text="CPU", end_text="120/200"
+      start_text="CPU", end_text="0/0"
     )
 
     memory_fill_bar = self.create_memory_fill_bar()
     self.update_fill_bar_data(
       memory_fill_bar,
-      new_data=100, total_data=100,
-      start_text="Mem", end_text="120/200"
+      new_data=0, total_data=100,
+      start_text="Mem", end_text="0/0"
     )
+
+  @staticmethod
+  def create_app_containers(layouts, global_stop_event):
+    containers = []
+    for num, layout in enumerate(layouts):
+      container = AppContainer(
+        "noop-app-i%s" % num,
+        "/sys/fs/cgroup",
+        layout, global_stop_event
+      )
+
+      container.initialize_bars()
+      containers.append(container)
+
+    show_changes()
+    return containers

@@ -1,53 +1,34 @@
 #!/usr/bin/env python
 
-from cgroup_container import CgroupContainer
-from constants import *
-from utils import StdScreen, Layout
-from unicurses import *
-from helpers import *
-from background_thread import BackgroundThread
 import threading
-import random
-from layout_creator import LayoutCreator
+
 from app_container import AppContainer
+from background_thread import BackgroundThread
+from constants import CHAR_Q, ESC_KEY
+from data_fetcher import DataFetcher
+from layout_creator import LayoutCreator
+from unicurses import endwin, getch
+from utils import StdScreen
 
 global_stop_event = threading.Event()
 
 
-def update_my_data(containers):
-  for cgroup_container in containers:
-    data = random.randint(1, 100)
-    cgroup_container.update_fill_bar_data(cgroup_container.cpu_fill_bar,
-                                          new_data=data, total_data=100,
-                                          start_text="CPU",
-                                          end_text="%s/100" % data)
-
-    cgroup_container.update_fill_bar_data(cgroup_container.memory_fill_bar,
-                                          new_data=data,
-                                          total_data=100, start_text="Mem",
-                                          end_text="%s/200" % data)
-
-  show_changes()
-
-
 def main():
+  standard_screen = StdScreen()
+  standard_screen.disable_cursor_and_key_echo()
 
-  stdscr = StdScreen()
-  stdscr.disable_cursor_and_key_echo()
-
-  lc = LayoutCreator(stdscr.MAX_WIDTH, stdscr.MAX_HEIGHT, 6)
+  lc = LayoutCreator(standard_screen.MAX_WIDTH, standard_screen.MAX_HEIGHT, 6)
   layouts = lc.create_layouts()
 
+  jb = BackgroundThread(
+    DataFetcher().update_my_data,
+    global_stop_event, 2,
+    AppContainer.create_app_containers(
+      layouts,
+      global_stop_event
+    )
+  )
 
-  containers = []
-  for num, layout in enumerate(layouts):
-    container = AppContainer("noop-app-i%s" % num, "/sys/fs/cgroup", layout, global_stop_event)
-    container.initialize_bars()
-    containers.append(container)
-
-  show_changes()
-
-  jb = BackgroundThread(update_my_data, global_stop_event, 1, containers)
   jb.start()
 
   start_event_loop()
