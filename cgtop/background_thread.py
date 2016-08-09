@@ -7,21 +7,24 @@ import threading
 
 
 class BackgroundThread(threading.Thread):
-  def __init__(self, callback, event, interval, cgroup_container):
-    """runs the callback function after interval seconds
+    def __init__(self, callback, interval, containers):
+        """runs the callback function after interval seconds
 
-    :param callback:  callback function to invoke
-    :param event: external event for controlling the update operation
-    :param interval: time in seconds after which callback if fired.
-    :type callback: function
-    :type interval: int
-    """
-    self.callback = callback
-    self.event = event
-    self.interval = interval
-    self.cgroup_container = cgroup_container
-    super(BackgroundThread, self).__init__()
+        :param callback:  callback function to invoke
+        :param event: external event for controlling the update operation
+        :param interval: time in seconds after which callback if fired.
+        :type callback: function
+        :type interval: int
+        """
+        self.callback = callback
+        self._stop = threading.Event()
+        self.interval = interval
+        self.containers = containers
+        super(BackgroundThread, self).__init__()
 
-  def run(self):
-    while not self.event.wait(self.interval):
-      self.callback(self.cgroup_container)
+    def run(self):
+        while not self._stop.wait(self.interval) and not self._stop.is_set():
+            self.callback(self.containers)
+
+    def stop(self):
+        self._stop.set()

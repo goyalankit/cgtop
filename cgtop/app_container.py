@@ -1,44 +1,26 @@
 from cgroup_container import CgroupContainer
-from helpers import show_changes
 
 
 class AppContainer(CgroupContainer):
-  def __init__(self, name, cgpath, layout, stop_event):
-    CgroupContainer.__init__(self, layout, title=name)
+    def __init__(self, name, cgpath, layout):
+        CgroupContainer.__init__(self, layout, title=name)
 
-    self.name = name
-    self.cgpath = cgpath
-    self.stop_event = stop_event
+        self.name = name
+        self.cgpath = cgpath
 
-  def initialize_bars(self):
-    self.title_window_on_screen()
+    def initialize_bars(self):
+        self.title_window_on_screen()
 
-    cpu_fill_bar = self.create_cpu_fill_bar()
-    self.update_fill_bar_data(
-      cpu_fill_bar,
-      new_data=0, total_data=100,
-      start_text="CPU", end_text="0/0"
-    )
+        cpu_fill_bar = self.create_cpu_fill_bar()
+        self.update_fill_bar_data(
+            cpu_fill_bar,
+            new_data=0, total_data=100,
+            start_text="CPU", end_text="0/0"
+        )
 
-    memory_fill_bar = self.create_memory_fill_bar()
-    self.update_fill_bar_data(
-      memory_fill_bar,
-      new_data=0, total_data=100,
-      start_text="Mem", end_text="0/0"
-    )
-
-  @staticmethod
-  def create_app_containers(layouts, global_stop_event):
-    containers = []
-    for num, layout in enumerate(layouts):
-      container = AppContainer(
-        "noop-app-i%s" % num,
-        "noop_app_i001",
-        layout, global_stop_event
-      )
-
-      container.initialize_bars()
-      containers.append(container)
-
-    show_changes()
-    return containers
+        memory_fill_bar = self.create_memory_fill_bar()
+        self.update_fill_bar_data(
+            memory_fill_bar,
+            new_data=0, total_data=100,
+            start_text="Mem", end_text="0/0"
+        )
