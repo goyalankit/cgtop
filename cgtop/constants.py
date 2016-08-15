@@ -1,9 +1,6 @@
 """
 constants used throughout the application/
 """
-import os
-import platform
-
 ESC_KEY = 27
 CHAR_Q = ord('q')
 
@@ -50,9 +47,9 @@ layout_grid = {
     16: [4, 4],
 }
 
-if os.environ.get('DEV') or platform.system() == 'Darwin':
-    CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
-    BASE_CGROUP_PATH = os.path.join(CURRENT_DIR, '../testdata/sys/fs/cgroup/')
-else:
-    # TODO: Differentiate between RHEL6 and RHEL7
-    BASE_CGROUP_PATH = "/sys/fs/cgroup"
+# TODO: Remove this once it's stable. We could simply abort
+# on osx.
+
+RHEL6_CGROUP_PATH = '/cgroup/lid'
+RHEL7_CGROUP_PATH = '/sys/fs/cgroup'
+CGROUP_DIRS = '/cgroup/lid'

@@ -1,20 +1,14 @@
-"""
-  Class to provide the functionality of updating the stats off the main thread,
-  run things as a thread job
-"""
-
 import threading
 
 
 class BackgroundThread(threading.Thread):
+    """Provides background thread that calls callback at given interval."""
     def __init__(self, callback, interval, containers):
-        """runs the callback function after interval seconds
+        """runs the callback function after interval seconds.
 
-        :param callback:  callback function to invoke
-        :param event: external event for controlling the update operation
+        :param callback: callback function to invoke on each interval
         :param interval: time in seconds after which callback if fired.
-        :type callback: function
-        :type interval: int
+        :param containers: CgroupContainer objects to update.
         """
         self.callback = callback
         self._stop = threading.Event()

@@ -1,0 +1,16 @@
+ 803 angoyal    17   0 2655M 65596 ?  0.0  0.4  7:02.76 /System/Library/CoreServices/Dock.app/Contents/MacOS/Dock
+  828 angoyal    17   0 2591M 56936 ?  0.0  0.3  4:57.14 /System/Library/PrivateFrameworks/CalendarAgent.framework/Versions/A/XPCServices/CalNCService.xpc/Contents/MacOS/CalNCService
+ 1063 angoyal    17   0 3899M  107M ?  0.0  0.7  3:22.95 /Applications/Quiver.app/Contents/MacOS/Quiver
+  806 angoyal    17   0 2541M 27448 ?  0.0  0.2  2:43.03 /System/Library/CoreServices/SystemUIServer.app/Contents/MacOS/SystemUIServer
+ 4125 angoyal    17   0 2708M 95996 ?  0.0  0.6  2:29.64 /Applications/Calendar.app/Contents/MacOS/Calendar
+ 4125 angoyal    17   0 2708M 95996 ?  0.0  0.6  2:29.64 /Applications/Calendar.app/Contents/MacOS/Calendar
+ 4125 angoyal    17   0 2708M 95996 ?  0.0  0.6  2:29.64 /Applications/Calendar.app/Contents/MacOS/Calendar
+ 4125 angoyal    17   0 2708M 95996 ?  0.0  0.6  2:29.64 /Applications/Calendar.app/Contents/MacOS/Calendar
+  807 angoyal    17   0 2818M 83972 ?  0.0  0.5  2:15.11 /System/Library/CoreServices/Finder.app/Contents/MacOS/Finder
+  872 angoyal    24   0 2536M 16956 ?  0.0  0.1  2:02.57 /Applications/Enterprise Connect.app/Contents/MacOS/Enterprise Connect
+  807 angoyal    17   0 2818M 83972 ?  0.0  0.5  2:15.11 /System/Library/CoreServices/Finder.app/Contents/MacOS/Finder
+  872 angoyal    24   0 2536M 16956 ?  0.0  0.1  2:02.57 /Applications/Enterprise Connect.app/Contents/MacOS/Enterprise Connect
+  807 angoyal    17   0 2818M 83972 ?  0.0  0.5  2:15.11 /System/Library/CoreServices/Finder.app/Contents/MacOS/Finder
+  872 angoyal    24   0 2536M 16956 ?  0.0  0.1  2:02.57 /Applications/Enterprise Connect.app/Contents/MacOS/Enterprise Connect
+  807 angoyal    17   0 2818M 83972 ?  0.0  0.5  2:15.11 /System/Library/CoreServices/Finder.app/Contents/MacOS/Finder
+  872 angoyal    24   0 2536M 16956 ?  0.0  0.1  2:02.57 /Applications/Enterprise Connect.app/Contents/MacOS/Enterprise Connect
